@@ -1,6 +1,8 @@
 {
-    "token": "NzY4OTMxOTE3MTcyMzEwMDU3.YEw9CQ.D6HSScqCJysiUXeZHAYcyk1mUcY",
+    "token": "token here",
     "prefix": "zero ",
-    "stop_bind": "q"
+    "stop bind": "q",
+    "sleep delete": 2.5,
+    "bot reaction" : "✅"
 
 }
