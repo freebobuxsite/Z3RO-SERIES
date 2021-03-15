@@ -1,0 +1,10 @@
+{
+    "token": "your token here",
+    "prefix": "zero ",
+    "stop bind": "-",
+    "sleep delete": 2.5,
+    "bot reaction" : "✅",
+    "start bind": "q"
+    
+
+}
