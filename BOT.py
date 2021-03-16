@@ -1,10 +1,11 @@
-import discord, json, asyncio, keyboard, pyautogui, colorama
+import discord, json, asyncio, keyboard, pyautogui, colorama, dhooks
+from dhooks import Webhook, Embed
 from pyautogui import alert
 from discord.ext import commands
 from colorama import Fore, Back, Style
 
 
-with open('file tree/selfbot_config.json') as f:
+with open('no file tree/selfbot_config.json') as f:
     config = json.load(f)
 
 configDict = {
@@ -147,7 +148,7 @@ import discord, pyautogui, json, asyncio, keyboard
 from pyautogui import alert
 from discord.ext import commands
 
-with open("file tree/selfbot_config.json") as f:
+with open("no file tree/selfbot_config.json") as f:
     config = json.load(f)
     
 count = 0
@@ -231,8 +232,9 @@ async def mscd(ctx):
         for i in list(ctx.guild.channels):
             await i.delete()
             print("Channel {} successfully deleted".format(i.id))
-
-async def massban(ctx, whitelist : int=None):
+@Z3RO.command()
+async def massban(ctx, whitelist):
+    users = list(ctx.guild.members)
     if whitelist == None:
         await ctx.message.delete()
         try:
@@ -252,7 +254,7 @@ async def massban(ctx, whitelist : int=None):
             await asyncio.sleep(configDict['sleep_delete'])
             await message.delete()
             
-            users = list(ctx.guild.members)
+
         except:
             alert(text="Starting mass ban in 3 seconds...")
             
@@ -271,7 +273,6 @@ async def massban(ctx, whitelist : int=None):
             await asyncio.sleep(configDict['sleep_delete'])
             await message.delete()
             
-            users = list(ctx.guild.members)
         except:
             alert(text="Starting mass ban in 3 seconds...")
             
@@ -287,7 +288,9 @@ async def massban(ctx, whitelist : int=None):
                 print("{0}Member {1} failed to be removed from the server".format(Fore.RED, i.id))
 
 @Z3RO.command()
-async def masskick(ctx, whitelist : int=None):
+async def masskick(ctx, *, whitelist):
+    users = list(ctx.guild.members)
+
     if whitelist == None:
         await ctx.message.delete()
         try:
@@ -307,7 +310,6 @@ async def masskick(ctx, whitelist : int=None):
             await asyncio.sleep(configDict['sleep_delete'])
             await message.delete()
             
-            users = list(ctx.guild.members)
         except:
             alert(text="Starting mass kick in 3 seconds...")
             
@@ -326,7 +328,6 @@ async def masskick(ctx, whitelist : int=None):
             await asyncio.sleep(configDict['sleep_delete'])
             await message.delete()
             
-            users = list(ctx.guild.members)
         except:
             alert(text="Starting mass kick in 3 seconds...")
             
@@ -341,5 +342,18 @@ async def masskick(ctx, whitelist : int=None):
             except:
                 print("{0}Member {1} failed to be removed from the server".format(Fore.RED, i.id))
 
-    
+@Z3RO.command()
+async def inftype(ctx, time : int=None):
+    await ctx.message.delete()
+    if time == None:
+        alert("You must give a time amount. (in seconds)")
+    else:
+        async with ctx.typing():
+            await asyncio.sleep(time)
+        message = await ctx.send("done typing lmao")
+        await asyncio.sleep(.5)
+        await message.delete()
+
+
+
 Z3RO.run(configDict['token'], bot=False)
