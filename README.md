@@ -3,7 +3,7 @@
 
 Z3RO SB (self bot) is a discord self bot (currently in development) that will be featuring 100+ commands for you to play around with!
 
-DOWNLOAD HERE : https://www.mediafire.com/folder/qy9xz35pb7f6n/z3ro
+DOWNLOAD HERE : https://mega.nz/folder/Tl0DRYBL#rLHUqFAAZR6k0QBR2Ov3QA
 ENTER YOUR TOKEN IN THE .JSON FILES!
 
 
