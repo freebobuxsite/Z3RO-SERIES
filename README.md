@@ -1,6 +1,8 @@
 # Z3RO-SB
 
 
+## WHATEVER YOU DO WITH Z3RO IS YOUR RESPONSIBILITY. I DO NOT CONDONE SELF BOTS, THIS IS A PROJECT I WANT PEOPLE TO CHECK OUT IN THEIR OWN SERVERS FOR FUN!
+
 Z3RO SB (self bot) is a discord self bot (currently in development) that will be featuring 100+ commands for you to play around with!
 
 DOWNLOAD HERE : https://zemult.github.io
