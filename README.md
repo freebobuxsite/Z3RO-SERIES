@@ -7,7 +7,7 @@
 **YOU ARE NOT ALLOWED TO CHANGE, DISTRIBUTE OR CLAIM THIS CODE.***
 
 **Z3RO SELF BOT:**
-Z3RO SB (self bot) is a discord self bot (currently in development) that will be featuring 100+ commands for you to play around with!
+Z3RO SB (self bot) is a discord self bot (currently in development) that will be features 20+ commands for you to play around with!
 This self bot was programmed by a developer by the name of zemult (- youtube : zemult  - disocrd : private(for obvious reasons))
 ENTER YOUR TOKEN IN THE .JSON FILES!
 DOWNLOAD HERE : https://zemult.github.io
