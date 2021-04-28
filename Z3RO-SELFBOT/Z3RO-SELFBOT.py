@@ -24,8 +24,15 @@ from discord.ext import commands
 from colorama import Fore,Back,Style
 import requests
 import random
+import string
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+import time
 
-with open(_O)as f:config=json.load(f)
+driver = webdriver.Chrome(options=chrome_options)
+with open("selfbot_config.json")as f:config=json.load(f)
 configDict={_K:config.get(_K),_L:config.get(_L),_E:config.get(_P),_A:config.get('sleep delete'),'bot_reaction':config.get('bot reaction'),_F:config.get(_F)}   
 Z3RO=commands.Bot(description='Z3RO Self bot',command_prefix=configDict[_L],self_bot=_M)
 @Z3RO.command()
@@ -88,7 +95,7 @@ count=0
 @Z3RO.event
 async def on_ready():
         global embeds
-        
+        alert("Thank you for using the newest and most imrpoved version of Z3RO self bot! Version: 0.15.0")
         alert(text=_Q + "(check terminal for embed enable/disable)");print(_R)
         print('Bot Online - developer: \ndiscord: zemult \nyoutube: zemult')
         embeds = False
@@ -255,15 +262,30 @@ async def ttsSpam(ctx, amount : int=None, *, message):
         message = C
         if D == _C:
                 if embeds:
-                        try:await ctx.message.delete();C=discord.Embed(title=_H,description='Message Amount Argument returns : null',color=10038562);C.set_footer(text='Z3RO RAID TOOL was programmed by zemult, donate him at https://paypal.me/mekhibatchler1 :)');A=await B.send(embed=C);await A.add_reaciton("✅");await asyncio.sleep(configDict[_A]);await A.delete()
-                        except:alert("This server does not allow embeds. \nMessage Amount Arg returns : null")
+                        try:
+                                await ctx.message.delete();C=discord.Embed(title=_H,description='Message Amount Argument returns : null',color=10038562)
+                                C.set_footer(text='Z3RO RAID TOOL was programmed by zemult, donate him at https://paypal.me/mekhibatchler1 :)')
+                                A=await B.send(embed=C);await A.add_reaciton("✅")
+                                await asyncio.sleep(configDict[_A])
+                                await A.delete()
+                        except:
+                                alert("This server does not allow embeds. \nMessage Amount Arg returns : null")
                 else:
                         alert("Message amount arg returns : null")
         if C == _C:
                 if embeds:
-                        try:await ctx.message.delete();C=discord.Embed(title=_H,description='Message Argument returns : null',color=10038562);C.set_footer(text='Z3RO RAID TOOL was programmed by zemult, donate him at https://paypal.me/mekhibatchler1 :)');A=await B.send(embed=C);await A.add_reaciton("✅");await asyncio.sleep(configDict[_A]);await A.delete()
-                        except:alert("This server does not allow embeds. \nMessage Arg returns : null")
-                else:alert("Message Arg returns : null")
+                        try:
+                                await ctx.message.delete()
+                                C=discord.Embed(title=_H,description='Message Argument returns : null',color=10038562)
+                                C.set_footer(text='Z3RO RAID TOOL was programmed by zemult, donate him at https://paypal.me/mekhibatchler1 :)')
+                                A=await B.send(embed=C)
+                                await A.add_reaciton("✅")
+                                await asyncio.sleep(configDict[_A])
+                                await A.delete()
+                        except:
+                                alert("This server does not allow embeds. \nMessage Arg returns : null")
+                else:
+                        alert("Message Arg returns : null")
         else:
                 if embeds:
                         try:await B.message.delete();C=discord.Embed(title='ZERO SB',description='Successful command. Spamming is 3 seconds...',color=10038562);C.add_field(name='Bind',value=f"Press {configDict[_E]} to stop the spam!");C.set_footer(text=_G);A=await B.send(embed=C);await A.add_reaction("✅");await asyncio.sleep(configDict[_A]);await A.delete()
@@ -285,8 +307,200 @@ async def ttsSpam(ctx, amount : int=None, *, message):
 async def HT(ctx):
     happy_list = ['Don\'t be sad, you have so much to do!', 'Don\'t forget your goals. Focus on those instead of being sad!', 'You know, God put you on this earth for a reason. Don\'t waste any time sulking around.']
     happyThought = random.choice(happy_list);happy_ThoughtMSG = await ctx.send(happyThought);happy_ThoughtMSG.add_reaction("👍")
-    
-    
+
+@Z3RO.command()
+async def numbers(ctx):
+        alert("Sending in 3 seconds.")
+        await asyncio.sleep(3)
+
+        channel = await Z3RO.fetch_channel(835415200521125908)
+        await asyncio.sleep(1)
+        count = 11617
+        for i in range(100):
+                count += 1
+                await channel.send(count)
+                await asyncio.sleep(2)
+@Z3RO.command()
+async def massadvert(ctx, *, message=None):
+        await ctx.message.delete()
+        if (message == None):
+                if embeds:
+                        try:
+                                embed = discord.Embed(title="Error", description="Message argument returns : null", color=10038562)
+                                embed.add_field(name="Reason:", value="You must give a message to mass advert.")
+                                message = await ctx.send(embed=embed)
+                                await asyncio.sleep(1.5)
+                                await message.delete()
+                                
+                        except:
+                                alert("Server does not allow embeds. \nYou must give a message to mass advert.")
+                else:
+                        alert("You must give a message to mass advert.")
+        else:
+                alert("Mass dming everyone in server this message: {}".format(message))
+                members = ctx.guild.members
+                for user in members:
+                        try:
+                                await user.send(message)
+                        except:
+                                print("rip")
+@Z3RO.command()
+async def gcspam(ctx, *, name : str=None):
+        if isinstance(ctx.message.channel, discord.GroupChannel):
+                if (name == None):
+                        if embeds:
+                                await ctx.message.delete()
+                                C=discord.Embed(title=_H,description='Name Argument returns : null',color=10038562)
+                                C.set_footer(text='Z3RO RAID TOOL was programmed by zemult, donate him at https://paypal.me/mekhibatchler1 :)')
+                                await ctx.send(embed=C)
+                        else:
+                                alert("Name argument returns : null")
+                else:
+                        wt = ''
+                        for x in name:
+                                nm = x + name
+                                await ctx.message.channel.edit(name=nm)
+        else:
+                if embeds:
+                                await ctx.message.delete()
+                                C=discord.Embed(title=_H,description='You must be in a group chat channel.',color=10038562)
+                                C.set_footer(text='Z3RO RAID TOOL was programmed by zemult, donate him at https://paypal.me/mekhibatchler1 :)')
+                                await ctx.send(embed=C)
+                else:
+                        alert("You must be in a group chat channel.")
+
+
+@Z3RO.command()
+async def pingsite(ctx, site : str=None):
+        mh = "https://"
+        if (site == None):
+                if embeds:
+
+                        await ctx.message.delete()
+                        C=discord.Embed(title=_H,description='\"https://\" must be in your site, so we can ping it.',color=10038562)
+                        C.set_footer(text='Z3RO RAID TOOL was programmed by zemult, donate him at https://paypal.me/mekhibatchler1 :)')
+                        await ctx.send(embed=C)       
+                else:
+                        alert("'https://' must be in your site, so we can ping it.")
+        if (site[0] == mh[0]) and (site[1] == mh[1]) and (site[2] == mh[2]) and (site[3] == mh[3]) and (site[4] == mh[4]) and (site[5] == mh[5]) and (site[6] == mh[6]) and (site[7] == mh[7]):
+                alert("Pinging site ({}) and sending status code in current channel.".format(site))
+                r = requests.get(site)
+                if r.status_code == 200:
+                        message = await ctx.send("{0} status code: {1} (OK)".format(site, r.status_code))
+                elif r.status_code == 400:
+                        message = await ctx.send("{0} status code: {1} (BAD)".format(site, r.status_code))
+                
+        else:
+                if embeds:
+
+                        await ctx.message.delete()
+                        C=discord.Embed(title=_H,description='\"https://\" must be in your site, so we can ping it.',color=10038562)
+                        C.set_footer(text='Z3RO RAID TOOL was programmed by zemult, donate him at https://paypal.me/mekhibatchler1 :)')
+                        await ctx.send(embed=C)       
+                else:
+                        alert("'https://' must be in your site, so we can ping it.")
+
+
+@Z3RO.command()
+async def namegen(ctx):
+        with open("usernames.json") as f:
+                v = json.load(f)
+                if embeds:
+                        embed = discord.Embed(title="Username", description="Generated username: {}".format(random.choice(v)), color=10038562)
+                        await ctx.send(embed=embed)
+                else:
+                        await ctx.send("Generated username: {}".format(random.choice(v)))
+@Z3RO.command()
+async def passwordgen(ctx, length: int=None):
+        if (length == None):
+                if embeds:
+                        embed = discord.Embed(title="Password", description="Generated password: {}".format(''.join(random.choice(string.ascii_lowercase) for x in range(random.randint(5, 15)))), color=10038562)
+                        await ctx.send(embed=embed)
+        else:
+                password = await ctx.send('Generated password: {}'.format(''.join(random.choice(string.ascii_lowercase) for x in range(length))))
+
+@Z3RO.command()
+async def spammer(ctx):
+        await ctx.message.delete()
+        alert("Go to the terminal for the rest of the command.")
+        tokens = []
+
+        am = int(input("Enter the amount of tokens you have/want to use."))
+        amn = am + 1
+        for y in range(1, amn):
+                token = str(input("Token {}: ".format(y)))
+                tokens.append(token)
+
+        qu = int(input("Do you want to join a specific server? \n1: Yes \n2: No"))
+        if (qu == 1):
+                invite = input("Enter server invite : ")
+
+                def join():
+                        global auth
+                        for auth in tokens:
+                                header = {
+                                        'authorization': auth
+                                }
+
+                                requests.post("https://discord.com/api/v8/invites/{}".format(invite), headers=header)
+                                print("Successfully server with {}".format(auth))
+
+                join()
+                print("Enter message: ")
+                message = input()
+                print("Enter channel ID")
+                chanID = input()
+                payload = {
+                        'content': message
+                }
+
+                while True:
+                        t = random.choice(tokens)
+
+                        header = {
+                                'authorization': t
+                        }
+                        url = 'https://discord.com/api/v8/channels/{}/messages'.format(chanID)
+                        requests.post(url, headers=header, data=payload)
+
+        else:
+                print("Enter message: ")
+                message = input()
+                print("Enter channel ID")
+                chanID = input()
+                payload = {
+                        'content': message
+                }
+                while True:
+                        t = random.choice(tokens);
+                        header = {"authorization": t}
+                        header = {
+                                'authorization': t
+                        }
+                        url = 'https://discord.com/api/v8/channels/{}/messages'.format(chanID)
+                        requests.post(url, headers=header, data=payload)
+@Z3RO.command()
+async def viewbot(ctx):
+        await ctx.message.delete()
+        alert("Go to the terminal for the rest of the command.")
+        url = str(input("Enter your url \n"))
+        views = int(
+                input("Enter your view amount \nAnything over 50 will take longer to register, \nas YouTube will catch on. \n"))
+        watchTime = int(
+                input("Enter the amount of seconds you want the bot to watch your video for. \nAnything below 30 will be detected by YouTube and your video views will take longer to register \nor completely take a pause for a few hours. \n60 is good for a minimum of 100 views."))
+
+        def viewBot():
+                driver.get(url)
+                print("Loading video...")
+
+                for view in range(views):
+                        time.sleep(watchTime)
+                        print("[!] View added.")
+                        driver.refresh()
+                        print("[-]Page refreshed")
+
+        viewBot()
+
 
 
 Z3RO.run(configDict[_K],bot=False)
