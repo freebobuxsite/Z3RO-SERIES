@@ -308,18 +308,7 @@ async def HT(ctx):
     happy_list = ['Don\'t be sad, you have so much to do!', 'Don\'t forget your goals. Focus on those instead of being sad!', 'You know, God put you on this earth for a reason. Don\'t waste any time sulking around.']
     happyThought = random.choice(happy_list);happy_ThoughtMSG = await ctx.send(happyThought);happy_ThoughtMSG.add_reaction("👍")
 
-@Z3RO.command()
-async def numbers(ctx):
-        alert("Sending in 3 seconds.")
-        await asyncio.sleep(3)
 
-        channel = await Z3RO.fetch_channel(835415200521125908)
-        await asyncio.sleep(1)
-        count = 11617
-        for i in range(100):
-                count += 1
-                await channel.send(count)
-                await asyncio.sleep(2)
 @Z3RO.command()
 async def massadvert(ctx, *, message=None):
         await ctx.message.delete()
