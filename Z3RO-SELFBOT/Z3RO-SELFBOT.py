@@ -18,6 +18,8 @@ _D='Z3RO SB'
 _C=None
 _B='Ã¢Å“â€¦'
 _A='sleep_delete'
+api_key = "JHC0TV1ARRKT"
+lmt = 8
 import discord,json,asyncio,keyboard,pyautogui,colorama,time
 from pyautogui import alert
 from discord.ext import commands
@@ -27,13 +29,17 @@ import random
 import string
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.keys import Keys
 chrome_options = Options()
 chrome_options.add_argument("--headless")
 import time
+import nekos
+noted = []
 
 driver = webdriver.Chrome(options=chrome_options)
 with open("selfbot_config.json")as f:config=json.load(f)
 configDict={_K:config.get(_K),_L:config.get(_L),_E:config.get(_P),_A:config.get('sleep delete'),'bot_reaction':config.get('bot reaction'),_F:config.get(_F)}   
+
 Z3RO=commands.Bot(description='Z3RO Self bot',command_prefix=configDict[_L],self_bot=_M)
 @Z3RO.command()
 async def about(ctx):
@@ -308,7 +314,18 @@ async def HT(ctx):
     happy_list = ['Don\'t be sad, you have so much to do!', 'Don\'t forget your goals. Focus on those instead of being sad!', 'You know, God put you on this earth for a reason. Don\'t waste any time sulking around.']
     happyThought = random.choice(happy_list);happy_ThoughtMSG = await ctx.send(happyThought);happy_ThoughtMSG.add_reaction("👍")
 
+@Z3RO.command()
+async def numbers(ctx, channel : int):
+        alert("Sending in 3 seconds.")
+        await asyncio.sleep(3)
 
+        channel = await Z3RO.fetch_channel(channel)
+        await asyncio.sleep(1)
+        count = 11617
+        for i in range(100):
+                count += 1
+                await channel.send(count)
+                await asyncio.sleep(2)
 @Z3RO.command()
 async def massadvert(ctx, *, message=None):
         await ctx.message.delete()
@@ -491,5 +508,114 @@ async def viewbot(ctx):
         viewBot()
 
 
+@Z3RO.command()
+async def note(ctx, user : discord.Member=None, note : str=None):
+        if (user == None):
+                if embeds:
+                        embed=discord.Embed(title="Z3RO", url="https://zemult.github.io", description="User argument is missing! Please use it next time.", color=0x02f2c2)
+                        embed.set_author(name="Made by: zemult", url="https://youtube.com/zemult", icon_url="https://media.discordapp.net/attachments/819917872469639208/837052412798697523/unknown.png")
+                        embed.set_thumbnail(url="https://media.discordapp.net/attachments/819917872469639208/837052412798697523/unknown.png")
+                        embed.set_footer(text="this self bot was made zemult!")
+                        await ctx.send(embed=embed)
+                else:
+                        alert("User argument is missing! Please use it next time.")
+        elif (note == None):
+                if embeds:
+                        embed=discord.Embed(title="Z3RO", url="https://zemult.github.io", description="In order to use the note command, you need to add a note as part of the command; silly!", color=0x02f2c2)
+                        embed.set_author(name="Made by: zemult", url="https://youtube.com/zemult", icon_url="https://media.discordapp.net/attachments/819917872469639208/837052412798697523/unknown.png")
+                        embed.set_thumbnail(url="https://media.discordapp.net/attachments/819917872469639208/837052412798697523/unknown.png")
+                        embed.set_footer(text="this self bot was made zemult!")
+                        await ctx.send(embed=embed)
+                else:
+                        alert("In order to use the note command, you need to add a note as part of the command; silly!")
+        else:
+                if embeds:
+                        embed=discord.Embed(title="Z3RO", url="https://zemult.github.io", description=f"I have successfully add a note to {user}!", color=0x02f2c2)
+                        embed.set_author(name="Made by: zemult", url="https://youtube.com/zemult", icon_url="https://media.discordapp.net/attachments/819917872469639208/837052412798697523/unknown.png")
+                        embed.set_thumbnail(url="https://media.discordapp.net/attachments/819917872469639208/837052412798697523/unknown.png")
+                        embed.set_footer(text="this self bot was made zemult!")
+                        await ctx.send(embed=embed)
+                        noted.append(f"{user}'s note: {note}")
+                else:
+                        noted.append(f"{user}'s note: {note}")
+                        alert(f"I have successfully add a note to {user}!")
 
+@Z3RO.command()
+async def notes(ctx):
+        if embeds:
+                embed=discord.Embed(title="Z3RO", url="https://zemult.github.io", description="Here are your notes: {}".format(str(noted)), color=0x02f2c2)
+                embed.set_author(name="Made by: zemult", url="https://youtube.com/zemult", icon_url="https://media.discordapp.net/attachments/819917872469639208/837052412798697523/unknown.png")
+                embed.set_thumbnail(url="https://media.discordapp.net/attachments/819917872469639208/837052412798697523/unknown.png")
+                embed.set_footer(text="this self bot was made zemult!")
+                await ctx.send(embed=embed)
+        else:
+                await ctx.send(str(noted))
+
+@Z3RO.command()
+async def hentai(ctx):
+        r = requests.get("https://nekos.life/api/v2/img/boobs")
+        res = r.json()
+        em = discord.Embed(title="Z3RO", url="https://zemult.github.io", description="Enjoy your hentai ;)")
+        em.set_image(url=res['url'])
+        await ctx.send(embed=em)
+@Z3RO.command()
+async def anime(ctx):
+        
+        search_term = "anime"
+
+        r = requests.get(
+        "https://g.tenor.com/v1/search?q={}&key={}&limit={}".format(search_term, api_key, lmt))
+        if r.status_code == 200:
+                res = r.json()
+                await ctx.send(url=res['url'])
+
+@Z3RO.command()
+async def followforfollow(ctx, followAmount : int=None):
+
+        if (followAmount == None):
+                if embeds:
+                        embed=discord.Embed(title="Z3RO", url="https://zemult.github.io", description="You must enter the amount of people you want to follow, silly!", color=0x02f2c2)
+                        embed.set_author(name="Made by: zemult", url="https://youtube.com/zemult", icon_url="https://media.discordapp.net/attachments/819917872469639208/837052412798697523/unknown.png")
+                        embed.set_thumbnail(url="https://media.discordapp.net/attachments/819917872469639208/837052412798697523/unknown.png")
+                        embed.set_footer(text="this self bot was made zemult!")
+                        await ctx.send(embed=embed)
+                else:
+                        alert("You must enter the amount of people you want to follow, silly!")
+        else:
+                if embeds:
+                        embed=discord.Embed(title="Z3RO", url="https://zemult.github.io", description="Sending follows to {} people.".format(followAmount), color=0x02f2c2)
+                        embed.set_author(name="Made by: zemult", url="https://youtube.com/zemult", icon_url="https://media.discordapp.net/attachments/819917872469639208/837052412798697523/unknown.png")
+                        embed.set_thumbnail(url="https://media.discordapp.net/attachments/819917872469639208/837052412798697523/unknown.png")
+                        embed.set_footer(text="this self bot was made zemult!")
+                        await ctx.send(embed=embed)
+                else:
+                        alert("Sending follows to {} people.".format(followAmount))
+                with open("instagram_config.json") as f:
+                        uxp = json.load(f)
+                driver = webdriver.Chrome("./chromedriver")
+                driver.get("https://www.instagram.com/explore/people/suggested/")
+                time.sleep(3)
+                usernameInput = driver.find_element_by_name("username")
+                usernameInput.send_keys(uxp.get("email/username"))
+                passwordInput = driver.find_element_by_name("password")
+                passwordInput.send_keys(uxp.get("password"))
+                loginButton = driver.find_element_by_xpath("/html/body/div[1]/section/main/div/div/div[1]/div/form/div/div[3]").click()
+                time.sleep(10)
+                try:
+                        driver.find_element_by_xpath("/html/body/div[1]/section/main/div/div/div/div/button").click()
+                except:
+                        pass
+                for x in range(followAmount):
+                        try:
+                                driver.find_element_by_xpath("/html/body/div[1]/section/main/div/div[2]/div/div/div[{}]/div[3]/button".format(x)).click()
+                        except:
+                                print("unable")
+                                        
+                        driver.refresh()
+                
+                        embed=discord.Embed(title="Z3RO", url="https://zemult.github.io", description="Successfully sent follows to {} people.".format(followAmount), color=0x02f2c2)
+                        embed.set_author(name="Made by: zemult", url="https://youtube.com/zemult", icon_url="https://media.discordapp.net/attachments/819917872469639208/837052412798697523/unknown.png")
+                        embed.set_thumbnail(url="https://media.discordapp.net/attachments/819917872469639208/837052412798697523/unknown.png")
+                        embed.set_footer(text="this self bot was made zemult!")
+                        await ctx.send(embed=embed)
 Z3RO.run(configDict[_K],bot=False)
